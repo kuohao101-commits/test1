@@ -667,65 +667,74 @@
       background:#fff;
       overflow:hidden;
     }
-    .mentor-marquee{
-      position:relative;
-      overflow:hidden;
-      padding:8px 0 10px;
-      mask-image:linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);
-      -webkit-mask-image:linear-gradient(to right,transparent 0,#000 5%,#000 95%,transparent 100%);
+    .mentor-groups{
+      display:grid;
+      gap:34px;
+      min-width:0;
     }
-    .mentor-marquee::before,
-    .mentor-marquee::after{
-      content:"";
-      position:absolute;
-      top:0;
-      width:120px;
-      height:100%;
-      z-index:2;
-      pointer-events:none;
+    .mentor-group{
+      display:grid;
+      gap:16px;
+      min-width:0;
     }
-    .mentor-marquee::before{
-      left:0;
-      background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,0) 100%);
+    .mentor-group-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
     }
-    .mentor-marquee::after{
-      right:0;
-      background:linear-gradient(270deg,#fff 0%,rgba(255,255,255,0) 100%);
+    .mentor-group-head h3{
+      color:#111827;
+      font-size:24px;
+      line-height:1.2;
+      margin:0;
+    }
+    .mentor-group-head p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.7;
+      max-width:540px;
+      margin:0;
     }
     .mentor-track{
-      display:flex;
+      display:grid;
+      max-width:100%;
+      min-width:0;
+      grid-auto-flow:column;
+      grid-auto-columns:300px;
       align-items:stretch;
-      gap:24px;
-      width:max-content;
-      animation:mentorScroll 78s linear infinite;
-      will-change:transform;
+      gap:18px;
+      overflow-x:auto;
+      padding:4px 4px 18px;
+      scroll-snap-type:x proximity;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(31,79,163,.28) transparent;
     }
-    .mentor-marquee:hover .mentor-track{
-      animation-play-state:paused;
+    .mentor-track::-webkit-scrollbar{
+      height:8px;
     }
-    @keyframes mentorScroll{
-      0%{transform:translateX(0)}
-      100%{transform:translateX(-50%)}
+    .mentor-track::-webkit-scrollbar-thumb{
+      background:rgba(31,79,163,.24);
+      border-radius:999px;
     }
     .mentor-card-scroll{
-      width:390px;
-      min-width:390px;
+      min-width:0;
       background:#fff;
       border:1px solid var(--line);
-      border-radius:28px;
-      box-shadow:0 18px 42px rgba(31,79,163,.09);
+      border-radius:18px;
+      box-shadow:0 14px 34px rgba(31,79,163,.08);
       overflow:hidden;
       transition:.25s;
-      flex-shrink:0;
+      scroll-snap-align:start;
     }
     .mentor-card-scroll:hover{
-      transform:translateY(-6px);
-      box-shadow:var(--shadow);
+      transform:translateY(-4px);
+      box-shadow:0 18px 42px rgba(31,79,163,.12);
     }
     .mentor-card-photo{
       position:relative;
       width:100%;
-      height:390px;
+      height:250px;
       background:#eef4ff;
       overflow:hidden;
       padding:0;
@@ -744,12 +753,11 @@
       left:0;
       right:0;
       bottom:0;
-      height:150px;
+      height:96px;
       background:linear-gradient(
         to bottom,
         rgba(255,255,255,0) 0%,
-        rgba(255,255,255,.35) 40%,
-        rgba(255,255,255,.78) 70%,
+        rgba(255,255,255,.42) 46%,
         #fff 100%
       );
       pointer-events:none;
@@ -757,39 +765,39 @@
     .mentor-card-info{
       position:relative;
       z-index:1;
-      margin-top:-62px;
-      padding:0 24px 26px;
+      margin-top:-38px;
+      padding:0 18px 20px;
       background:#fff;
     }
     .mentor-tag{
       display:inline-flex;
       align-items:center;
-      padding:6px 12px;
+      padding:5px 10px;
       border-radius:999px;
       background:var(--brand-light);
       color:var(--brand);
       font-size:12px;
       font-weight:900;
-      margin-bottom:14px;
+      margin-bottom:12px;
     }
     .mentor-card-info h3{
-      font-size:28px;
+      font-size:24px;
       line-height:1.1;
-      margin-bottom:10px;
+      margin-bottom:8px;
       color:#111827;
-      letter-spacing:-.02em;
+      letter-spacing:0;
     }
     .mentor-role{
       color:#25324a;
-      font-size:15px;
+      font-size:14px;
       font-weight:900;
-      margin-bottom:8px;
-      line-height:1.65;
+      margin-bottom:6px;
+      line-height:1.6;
     }
     .mentor-bio{
       color:var(--muted);
-      font-size:14px;
-      line-height:1.85;
+      font-size:13px;
+      line-height:1.75;
     }
 
     .cases{
@@ -1038,11 +1046,11 @@
       .hero-inner{
         padding-bottom:120px;
       }
-      .mentor-card-scroll{
-        width:320px;
+      .mentor-track{
+        grid-auto-columns:280px;
       }
       .mentor-card-photo{
-        height:300px;
+        height:230px;
       }
       .faq-copy{
         position:relative;
@@ -1109,19 +1117,28 @@
       .program-hero h2{
         white-space:normal;
       }
-      .mentor-marquee::before,
-      .mentor-marquee::after{
-        width:40px;
+      .mentors .section-desc,
+      .mentor-group-head p{
+        max-width:100%;
+        overflow-wrap:anywhere;
+      }
+      .mentor-groups{
+        gap:28px;
+      }
+      .mentor-group-head{
+        display:block;
+      }
+      .mentor-group-head h3{
+        font-size:21px;
+        margin-bottom:6px;
       }
       .mentor-track{
-        gap:16px;
-        animation-duration:55s;
-      }
-      .mentor-card-scroll{
-        width:280px;
+        grid-auto-columns:250px;
+        gap:14px;
+        padding-bottom:14px;
       }
       .mentor-card-photo{
-        height:260px;
+        height:220px;
       }
       .mentor-card-info{
         padding:18px;
@@ -1481,245 +1498,139 @@
           <p class="section-desc">导师团队覆盖加拿大本科辅导、英国本科申请、国际课程、竞赛与牛剑/G5笔试面试方向，为不同阶段学生提供专业支持。</p>
         </div>
 
-        <div class="mentor-marquee reveal">
-          <div class="mentor-track">
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 12%;"><img src="assets/mentor-01.jpg" alt="Crystal"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">加拿大本科辅导</span>
-                <h3>Crystal</h3>
-                <p class="mentor-role">多伦多大学统计专业｜cGPA 3.8+</p>
-                <p class="mentor-bio">香港大学AI教育学全奖博士在读｜12年国际教育及学术规划经验</p>
+        <div class="mentor-groups reveal">
+          <div class="mentor-group mentor-group-uk">
+            <div class="mentor-group-head">
+              <h3>英国导师</h3>
+              <p>覆盖牛剑/G5申请、国际竞赛、笔试面试与学术能力提升方向。</p>
+            </div>
+            <div class="mentor-track">
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 16%;"><img src="assets/mentor-05.jpg" alt="Erwin"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">物理/牛剑申请</span>
+                  <h3>Erwin</h3>
+                  <p class="mentor-role">牛津大学物理系｜PAT 97分全球第一</p>
+                  <p class="mentor-bio">物理碗01区 TOP1｜BPhO近满分Top Gold｜累计带领56位学员上岸牛剑</p>
+                </div>
+              </div>
+
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 14%;"><img src="assets/mentor-06.jpg" alt="Sam"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">物理/牛剑申请</span>
+                  <h3>Sam</h3>
+                  <p class="mentor-role">牛津大学物理系｜PAT 95分全球第五</p>
+                  <p class="mentor-bio">天津市中考状元｜BPhO Top Gold｜累计带领56位学员上岸牛剑</p>
+                </div>
+              </div>
+
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 20%;"><img src="assets/mentor-07.jpg" alt="Steve"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">数学竞赛/G5规划</span>
+                  <h3>Steve</h3>
+                  <p class="mentor-role">牛津大学数学系本硕毕业</p>
+                  <p class="mentor-bio">曾任牛津亚太区学生会主席｜10年国际数学竞赛及G5申请规划经验</p>
+                </div>
+              </div>
+
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-08.jpg" alt="Helen"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">生物医学/竞赛</span>
+                  <h3>Helen</h3>
+                  <p class="mentor-role">牛津大学生物医学系 Distinction</p>
+                  <p class="mentor-bio">USABO Gold｜UKChO Gold｜学员竞赛获奖率超80%，牛剑面邀率90%</p>
+                </div>
+              </div>
+
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 16%;"><img src="assets/mentor-09.jpg" alt="Holly"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">经济/G5申请</span>
+                  <h3>Holly</h3>
+                  <p class="mentor-role">剑桥大学经济系｜IEO金奖</p>
+                  <p class="mentor-bio">EEO个人金奖｜TMUA 7.5分｜1000h+经济竞赛及剑桥经济申请辅导经验</p>
+                </div>
+              </div>
+
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 14%;"><img src="assets/mentor-10.jpg" alt="Christine"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">化学竞赛/牛剑</span>
+                  <h3>Christine</h3>
+                  <p class="mentor-role">牛津大学化学系本硕</p>
+                  <p class="mentor-bio">UKChO Gold｜学员竞赛金奖率100%｜5年国际化学竞赛及牛剑辅导经验</p>
+                </div>
+              </div>
+
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 20%;"><img src="assets/mentor-11.jpg" alt="Christine"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">经济/AS体系</span>
+                  <h3>Christine</h3>
+                  <p class="mentor-role">剑桥大学经济系｜新加坡莱佛士书院</p>
+                  <p class="mentor-bio">擅长AS体系辅导｜带过上百学生取得A*｜4000h+经济竞赛及剑桥经济申请辅导经验</p>
+                </div>
+              </div>
+
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-12.jpg" alt="Haoran"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">物理/牛剑笔面试</span>
+                  <h3>Haoran</h3>
+                  <p class="mentor-role">剑桥大学自然科学专业物理方向</p>
+                  <p class="mentor-bio">剑桥笔试NSAA 26.7/27｜SG ALevel Full distinctions｜1000h+物理竞赛及牛剑笔面试辅导经验</p>
+                </div>
               </div>
             </div>
+          </div>
 
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 22%;"><img src="assets/mentor-02.jpg" alt="Vicky"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">加拿大本科辅导</span>
-                <h3>Vicky</h3>
-                <p class="mentor-role">多伦多大学金融本｜CGPA 3.9</p>
-                <p class="mentor-bio">牛津金融经济硕士HD毕业｜10年加拿大本科辅导经验</p>
-              </div>
+          <div class="mentor-group mentor-group-canada">
+            <div class="mentor-group-head">
+              <h3>加拿大导师</h3>
+              <p>覆盖加拿大本科课程辅导、院校方向规划、GPA提升与长期学业陪跑。</p>
             </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-03.jpg" alt="HUAHUA"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">滑铁卢方向</span>
-                <h3>HUAHUA</h3>
-                <p class="mentor-role">滑铁卢大学精算统计双专业｜均分95+</p>
-                <p class="mentor-bio">加拿大本硕3.5年极速毕业｜12年加拿大各大学辅导及规划经验</p>
+            <div class="mentor-track">
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 12%;"><img src="assets/mentor-01.jpg" alt="Crystal"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">加拿大本科辅导</span>
+                  <h3>Crystal</h3>
+                  <p class="mentor-role">多伦多大学统计专业｜cGPA 3.8+</p>
+                  <p class="mentor-bio">香港大学AI教育学全奖博士在读｜12年国际教育及学术规划经验</p>
+                </div>
               </div>
-            </div>
 
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-04.jpg" alt="Rosy"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">UBC方向</span>
-                <h3>Rosy</h3>
-                <p class="mentor-role">UBC Sauder金融均分90+毕业</p>
-                <p class="mentor-bio">现加拿大五大行财务规划师｜12年加拿大各大学辅导及规划经验</p>
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 22%;"><img src="assets/mentor-02.jpg" alt="Vicky"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">加拿大本科辅导</span>
+                  <h3>Vicky</h3>
+                  <p class="mentor-role">多伦多大学金融本｜CGPA 3.9</p>
+                  <p class="mentor-bio">牛津金融经济硕士HD毕业｜10年加拿大本科辅导经验</p>
+                </div>
               </div>
-            </div>
 
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 16%;"><img src="assets/mentor-05.jpg" alt="Erwin"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">物理/牛剑申请</span>
-                <h3>Erwin</h3>
-                <p class="mentor-role">牛津大学物理系｜PAT 97分全球第一</p>
-                <p class="mentor-bio">物理碗01区 TOP1｜BPhO近满分Top Gold｜累计带领56位学员上岸牛剑</p>
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-03.jpg" alt="HUAHUA"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">滑铁卢方向</span>
+                  <h3>HUAHUA</h3>
+                  <p class="mentor-role">滑铁卢大学精算统计双专业｜均分95+</p>
+                  <p class="mentor-bio">加拿大本硕3.5年极速毕业｜12年加拿大各大学辅导及规划经验</p>
+                </div>
               </div>
-            </div>
 
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 14%;"><img src="assets/mentor-06.jpg" alt="Sam"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">物理/牛剑申请</span>
-                <h3>Sam</h3>
-                <p class="mentor-role">牛津大学物理系｜PAT 95分全球第五</p>
-                <p class="mentor-bio">天津市中考状元｜BPhO Top Gold｜累计带领56位学员上岸牛剑</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 20%;"><img src="assets/mentor-07.jpg" alt="Steve"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">数学竞赛/G5规划</span>
-                <h3>Steve</h3>
-                <p class="mentor-role">牛津大学数学系本硕毕业</p>
-                <p class="mentor-bio">曾任牛津亚太区学生会主席｜10年国际数学竞赛及G5申请规划经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-08.jpg" alt="Helen"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">生物医学/竞赛</span>
-                <h3>Helen</h3>
-                <p class="mentor-role">牛津大学生物医学系 Distinction</p>
-                <p class="mentor-bio">USABO Gold｜UKChO Gold｜学员竞赛获奖率超80%，牛剑面邀率90%</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 16%;"><img src="assets/mentor-09.jpg" alt="Holly"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">经济/G5申请</span>
-                <h3>Holly</h3>
-                <p class="mentor-role">剑桥大学经济系｜IEO金奖</p>
-                <p class="mentor-bio">EEO个人金奖｜TMUA 7.5分｜1000h+经济竞赛及剑桥经济申请辅导经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 14%;"><img src="assets/mentor-10.jpg" alt="Christine"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">化学竞赛/牛剑</span>
-                <h3>Christine</h3>
-                <p class="mentor-role">牛津大学化学系本硕</p>
-                <p class="mentor-bio">UKChO Gold｜学员竞赛金奖率100%｜5年国际化学竞赛及牛剑辅导经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 20%;"><img src="assets/mentor-11.jpg" alt="Christine"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">经济/AS体系</span>
-                <h3>Christine</h3>
-                <p class="mentor-role">剑桥大学经济系｜新加坡莱佛士书院</p>
-                <p class="mentor-bio">擅长AS体系辅导｜带过上百学生取得A*｜4000h+经济竞赛及剑桥经济申请辅导经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-12.jpg" alt="Haoran"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">物理/牛剑笔面试</span>
-                <h3>Haoran</h3>
-                <p class="mentor-role">剑桥大学自然科学专业物理方向</p>
-                <p class="mentor-bio">剑桥笔试NSAA 26.7/27｜SG ALevel Full distinctions｜1000h+物理竞赛及牛剑笔面试辅导经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 12%;"><img src="assets/mentor-01.jpg" alt="Crystal"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">加拿大本科辅导</span>
-                <h3>Crystal</h3>
-                <p class="mentor-role">多伦多大学统计专业｜cGPA 3.8+</p>
-                <p class="mentor-bio">香港大学AI教育学全奖博士在读｜12年国际教育及学术规划经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 22%;"><img src="assets/mentor-02.jpg" alt="Vicky"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">加拿大本科辅导</span>
-                <h3>Vicky</h3>
-                <p class="mentor-role">多伦多大学金融本｜CGPA 3.9</p>
-                <p class="mentor-bio">牛津金融经济硕士HD毕业｜10年加拿大本科辅导经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-03.jpg" alt="HUAHUA"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">滑铁卢方向</span>
-                <h3>HUAHUA</h3>
-                <p class="mentor-role">滑铁卢大学精算统计双专业｜均分95+</p>
-                <p class="mentor-bio">加拿大本硕3.5年极速毕业｜12年加拿大各大学辅导及规划经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-04.jpg" alt="Rosy"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">UBC方向</span>
-                <h3>Rosy</h3>
-                <p class="mentor-role">UBC Sauder金融均分90+毕业</p>
-                <p class="mentor-bio">现加拿大五大行财务规划师｜12年加拿大各大学辅导及规划经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 16%;"><img src="assets/mentor-05.jpg" alt="Erwin"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">物理/牛剑申请</span>
-                <h3>Erwin</h3>
-                <p class="mentor-role">牛津大学物理系｜PAT 97分全球第一</p>
-                <p class="mentor-bio">物理碗01区 TOP1｜BPhO近满分Top Gold｜累计带领56位学员上岸牛剑</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 14%;"><img src="assets/mentor-06.jpg" alt="Sam"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">物理/牛剑申请</span>
-                <h3>Sam</h3>
-                <p class="mentor-role">牛津大学物理系｜PAT 95分全球第五</p>
-                <p class="mentor-bio">天津市中考状元｜BPhO Top Gold｜累计带领56位学员上岸牛剑</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 20%;"><img src="assets/mentor-07.jpg" alt="Steve"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">数学竞赛/G5规划</span>
-                <h3>Steve</h3>
-                <p class="mentor-role">牛津大学数学系本硕毕业</p>
-                <p class="mentor-bio">曾任牛津亚太区学生会主席｜10年国际数学竞赛及G5申请规划经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-08.jpg" alt="Helen"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">生物医学/竞赛</span>
-                <h3>Helen</h3>
-                <p class="mentor-role">牛津大学生物医学系 Distinction</p>
-                <p class="mentor-bio">USABO Gold｜UKChO Gold｜学员竞赛获奖率超80%，牛剑面邀率90%</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 16%;"><img src="assets/mentor-09.jpg" alt="Holly"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">经济/G5申请</span>
-                <h3>Holly</h3>
-                <p class="mentor-role">剑桥大学经济系｜IEO金奖</p>
-                <p class="mentor-bio">EEO个人金奖｜TMUA 7.5分｜1000h+经济竞赛及剑桥经济申请辅导经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 14%;"><img src="assets/mentor-10.jpg" alt="Christine"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">化学竞赛/牛剑</span>
-                <h3>Christine</h3>
-                <p class="mentor-role">牛津大学化学系本硕</p>
-                <p class="mentor-bio">UKChO Gold｜学员竞赛金奖率100%｜5年国际化学竞赛及牛剑辅导经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 20%;"><img src="assets/mentor-11.jpg" alt="Christine"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">经济/AS体系</span>
-                <h3>Christine</h3>
-                <p class="mentor-role">剑桥大学经济系｜新加坡莱佛士书院</p>
-                <p class="mentor-bio">擅长AS体系辅导｜带过上百学生取得A*｜4000h+经济竞赛及剑桥经济申请辅导经验</p>
-              </div>
-            </div>
-
-            <div class="mentor-card-scroll">
-              <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-12.jpg" alt="Haoran"></div>
-              <div class="mentor-card-info">
-                <span class="mentor-tag">物理/牛剑笔面试</span>
-                <h3>Haoran</h3>
-                <p class="mentor-role">剑桥大学自然科学专业物理方向</p>
-                <p class="mentor-bio">剑桥笔试NSAA 26.7/27｜SG ALevel Full distinctions｜1000h+物理竞赛及牛剑笔面试辅导经验</p>
+              <div class="mentor-card-scroll">
+                <div class="mentor-card-photo" style="--pos:center 18%;"><img src="assets/mentor-04.jpg" alt="Rosy"></div>
+                <div class="mentor-card-info">
+                  <span class="mentor-tag">UBC方向</span>
+                  <h3>Rosy</h3>
+                  <p class="mentor-role">UBC Sauder金融均分90+毕业</p>
+                  <p class="mentor-bio">现加拿大五大行财务规划师｜12年加拿大各大学辅导及规划经验</p>
+                </div>
               </div>
             </div>
           </div>
