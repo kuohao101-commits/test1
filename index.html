@@ -274,6 +274,21 @@
       color:var(--muted);
       max-width:650px;
     }
+    .uk-services-head{
+      grid-template-columns:auto minmax(360px,1fr);
+      align-items:center;
+    }
+    .uk-services-title-wrap{
+      min-width:max-content;
+    }
+    .uk-services-head .section-title{
+      white-space:nowrap;
+      font-size:clamp(34px,3.35vw,48px);
+    }
+    .uk-services-head .section-desc{
+      max-width:620px;
+      line-height:1.8;
+    }
 
     .capabilities{
       background:#f5f9ff;
@@ -701,7 +716,7 @@
       max-width:100%;
       min-width:0;
       grid-auto-flow:column;
-      grid-auto-columns:300px;
+      grid-auto-columns:260px;
       align-items:stretch;
       gap:18px;
       overflow-x:auto;
@@ -742,7 +757,7 @@
     .mentor-card-photo img{
       width:100%;
       height:100%;
-      object-fit:cover;
+      object-fit:contain;
       object-position:var(--pos,center 38%);
       display:block;
       transform:scale(1.02);
@@ -803,34 +818,131 @@
     .cases{
       background:#f5f9ff;
     }
-    .case-grid{
+    .case-rows{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
+      gap:24px;
+      min-width:0;
     }
-    .case-card{
+    .case-row{
       border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:26px;
+      border-radius:22px;
       background:#fff;
       box-shadow:0 16px 38px rgba(31,79,163,.08);
+      overflow:hidden;
+      min-width:0;
     }
-    .case-card h3{
-      font-size:21px;
-      margin:12px 0;
+    .case-row-head{
+      display:grid;
+      grid-template-columns:minmax(220px,320px) 1fr;
+      gap:18px;
+      align-items:end;
+      padding:22px 24px 14px;
+      min-width:0;
     }
-    .case-card p{
-      color:var(--muted);
-      font-size:15px;
+    .case-row-title{
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
     .case-label{
       display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
       border-radius:999px;
       background:var(--brand-light);
       color:var(--brand);
-      padding:7px 12px;
       font-weight:900;
-      font-size:12px;
+      font-size:13px;
+      flex:0 0 auto;
+    }
+    .case-row h3{
+      font-size:23px;
+      line-height:1.25;
+      margin:0;
+    }
+    .case-row p{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.75;
+      margin:0;
+      min-width:0;
+      overflow-wrap:anywhere;
+    }
+    .case-track{
+      display:grid;
+      max-width:100%;
+      min-width:0;
+      grid-auto-flow:column;
+      grid-auto-columns:300px;
+      gap:16px;
+      overflow-x:auto;
+      padding:0 24px 22px;
+      scroll-snap-type:x proximity;
+      scrollbar-width:thin;
+      scrollbar-color:rgba(31,79,163,.28) transparent;
+    }
+    .case-track::-webkit-scrollbar{
+      height:8px;
+    }
+    .case-track::-webkit-scrollbar-thumb{
+      background:rgba(31,79,163,.24);
+      border-radius:999px;
+    }
+    .case-shot{
+      scroll-snap-align:start;
+      border:1px dashed rgba(31,79,163,.26);
+      border-radius:16px;
+      background:
+        linear-gradient(135deg,rgba(31,79,163,.08),rgba(239,246,255,.72)),
+        repeating-linear-gradient(-45deg,rgba(31,79,163,.07) 0,rgba(31,79,163,.07) 1px,transparent 1px,transparent 12px);
+      aspect-ratio:3/4;
+      min-height:0;
+      padding:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:rgba(31,79,163,.62);
+      font-size:13px;
+      font-weight:900;
+      letter-spacing:.06em;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .case-shot:before{
+      content:"";
+      position:absolute;
+      inset:14px;
+      border-radius:12px;
+      border:1px solid rgba(31,79,163,.14);
+      background:rgba(255,255,255,.42);
+    }
+    .case-shot span{
+      position:relative;
+      z-index:1;
+    }
+    .case-shot img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      display:block;
+      position:absolute;
+      inset:0;
+      z-index:2;
+    }
+    .case-shot.has-image{
+      border-style:solid;
+      background:#fff;
+      padding:0;
+    }
+    .case-shot.has-image span{
+      padding:16px;
+    }
+    .case-shot img[src*="case-university-"]{
+      object-fit:cover;
+      object-position:center center;
     }
 
     .insights{
@@ -1039,9 +1151,26 @@
       .capabilities-cards{
         grid-template-columns:repeat(2,1fr);
       }
-      .service-cards,
-      .case-grid{
+      .service-cards{
         grid-template-columns:repeat(2,1fr);
+      }
+      .case-row-head{
+        grid-template-columns:1fr;
+      }
+      .case-track{
+        grid-auto-columns:240px;
+      }
+      .uk-services-head{
+        display:block;
+      }
+      .uk-services-title-wrap{
+        min-width:0;
+      }
+      .uk-services-head .section-title{
+        white-space:normal;
+      }
+      .case-shot{
+        min-height:0;
       }
       .hero-inner{
         padding-bottom:120px;
@@ -1088,9 +1217,19 @@
         padding-bottom:120px;
       }
       .capabilities-cards,
-      .service-cards,
-      .case-grid{
+      .service-cards{
         grid-template-columns:1fr;
+      }
+      .case-row-head{
+        padding:20px 18px 12px;
+      }
+      .case-track{
+        grid-auto-columns:220px;
+        gap:12px;
+        padding:0 18px 18px;
+      }
+      .case-shot{
+        min-height:0;
       }
       section{
         padding:62px 0;
@@ -1118,6 +1257,7 @@
         white-space:normal;
       }
       .mentors .section-desc,
+      .cases .section-desc,
       .mentor-group-head p{
         max-width:100%;
         overflow-wrap:anywhere;
@@ -1378,10 +1518,10 @@
       </div>
     </section>
 
-    <section class="program-detail soft">
+    <section class="program-detail soft uk-detail">
       <div class="container">
-        <div class="section-head reveal">
-          <div>
+        <div class="section-head reveal uk-services-head">
+          <div class="uk-services-title-wrap">
             <div class="section-kicker">UK Services</div>
             <h2 class="section-title">英国本科申请与学术能力提升</h2>
           </div>
@@ -1645,26 +1785,101 @@
             <div class="section-kicker">Success Stories</div>
             <h2 class="section-title">过往辅导案例</h2>
           </div>
-          <p class="section-desc">这里后续放脱敏案例、家长反馈、学员反馈截图和线下活动照片。当前先保留展示结构。</p>
+          <p class="section-desc">按服务方向做成四条案例滑动展示，后续每一排都可以放多张截图、Offer、成绩单、家长反馈或活动图片。</p>
         </div>
 
-        <div class="case-grid">
-          <div class="case-card reveal">
-            <span class="case-label">课程辅导案例</span>
-            <h3>从听不懂Lecture到建立复习节奏</h3>
-            <p>适合放课程同步辅导、Test/Midterm冲刺和Final备考类反馈。</p>
+        <div class="case-rows">
+          <div class="case-row reveal">
+            <div class="case-row-head">
+              <div class="case-row-title">
+                <span class="case-label">01</span>
+                <h3>国际课程辅导</h3>
+              </div>
+              <p>预留 IGCSE、GCSE、A-Level、IB、AP 等课程辅导成果截图与学生反馈。</p>
+            </div>
+            <div class="case-track" aria-label="国际课程辅导截图滑动展示">
+              <div class="case-shot has-image"><img src="assets/case-course-01.JPEG" alt="2025 ALEVEL 进阶数学 A 成绩捷报" onerror="this.remove()"><span>A-Level 进阶数学 A<br>截图 01</span></div>
+              <div class="case-shot has-image"><img src="assets/case-course-02.JPEG" alt="2025 ALEVEL 经济与进阶数学 AA 成绩捷报" onerror="this.remove()"><span>A-Level 经济/进阶数学 AA<br>截图 02</span></div>
+              <div class="case-shot has-image"><img src="assets/case-course-03.JPEG" alt="2025 ALEVEL 进阶数学与化学 AA 成绩捷报" onerror="this.remove()"><span>A-Level 进阶数学/化学 AA<br>截图 03</span></div>
+              <div class="case-shot has-image"><img src="assets/case-course-04.JPEG" alt="2025 ALEVEL 经济 A 成绩捷报" onerror="this.remove()"><span>A-Level 经济 A<br>截图 04</span></div>
+              <div class="case-shot has-image"><img src="assets/case-course-05.JPEG" alt="2025 ALEVEL 进阶数学 A 成绩捷报" onerror="this.remove()"><span>A-Level 进阶数学 A<br>截图 05</span></div>
+                        </div>
           </div>
 
-          <div class="case-card reveal">
-            <span class="case-label">选课规划案例</span>
-            <h3>新生第一学期课表结构优化</h3>
-            <p>适合放选课陪跑、Waitlist监控、专业路径规划类反馈。</p>
+          <div class="case-row reveal">
+            <div class="case-row-head">
+              <div class="case-row-title">
+                <span class="case-label">02</span>
+                <h3>国际竞赛辅导</h3>
+              </div>
+              <p>预留竞赛获奖、备赛过程、阶段测评和导师带队成果等图片素材。</p>
+            </div>
+            <div class="case-track" aria-label="国际竞赛辅导截图滑动展示">
+              <div class="case-shot has-image"><img src="assets/case-competition-01.jfif" alt="2026 BPhO Round 1 Global Gold competition result" onerror="this.remove()"><span>Competition case<br>Image 01</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-02.jfif" alt="2026 BPhO Round 1 Top Gold competition result" onerror="this.remove()"><span>Competition case<br>Image 02</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-03.jfif" alt="2026 BPhO Round 1 Top Gold competition result" onerror="this.remove()"><span>Competition case<br>Image 03</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-04.jfif" alt="2026 BPhO Round 1 Top Gold competition result" onerror="this.remove()"><span>Competition case<br>Image 04</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-05.jfif" alt="2026 BPhO Round 1 certificate result" onerror="this.remove()"><span>Competition case<br>Image 05</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-06.jfif" alt="2026 BPhO Round 1 Top Gold certificate result" onerror="this.remove()"><span>Competition case<br>Image 06</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-07.jfif" alt="2026 BPhO IPC Global Gold competition result" onerror="this.remove()"><span>Competition case<br>Image 07</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-08.jfif" alt="2026 BPhO IPC Gold Award competition result" onerror="this.remove()"><span>Competition case<br>Image 08</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-09.jfif" alt="2026 BPhO SPC Global Award competition result" onerror="this.remove()"><span>Competition case<br>Image 09</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-10.jfif" alt="2026 BPhO SPC Global Gold competition result" onerror="this.remove()"><span>Competition case<br>Image 10</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-11.png" alt="2024 Chemistry Olympiad Gold Certificate" onerror="this.remove()"><span>Competition case<br>Image 11</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-12.png" alt="2024 BPhO Round 1 Top Gold Certificate" onerror="this.remove()"><span>Competition case<br>Image 12</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-13.png" alt="2024 Chemistry Olympiad Gold Certificate" onerror="this.remove()"><span>Competition case<br>Image 13</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-14.png" alt="2024 BPhO Senior Physics Challenge Certificate" onerror="this.remove()"><span>Competition case<br>Image 14</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-15.png" alt="2024 AMC 8 Honor Roll Certificate" onerror="this.remove()"><span>Competition case<br>Image 15</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-16.png" alt="2024 AMC 12 Honor Roll of Distinction Certificate" onerror="this.remove()"><span>Competition case<br>Image 16</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-17.png" alt="2024 AMC 8 Honor Roll of Distinction Certificate" onerror="this.remove()"><span>Competition case<br>Image 17</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-18.png" alt="2024 Chemistry Olympiad Gold Certificate" onerror="this.remove()"><span>Competition case<br>Image 18</span></div>
+              <div class="case-shot has-image"><img src="assets/case-competition-19.png" alt="2023 BPhO Round 1 Top Gold Certificate" onerror="this.remove()"><span>Competition case<br>Image 19</span></div>
+            </div>
           </div>
 
-          <div class="case-card reveal">
-            <span class="case-label">家长反馈</span>
-            <h3>从看不懂体系到看得见进度</h3>
-            <p>适合放家长对阶段反馈、督学报告、风险提醒的评价。</p>
+          <div class="case-row reveal">
+            <div class="case-row-head">
+              <div class="case-row-title">
+                <span class="case-label">03</span>
+                <h3>本科申请</h3>
+              </div>
+              <p>预留 Offer、申请规划节点、笔试面试反馈和文书规划相关展示内容。</p>
+            </div>
+            <div class="case-track" aria-label="本科申请截图滑动展示">
+              <div class="case-shot has-image"><img src="assets/case-application-01.jfif" alt="Oxford and Cambridge application success case 01" onerror="this.remove()"><span>Application case<br>Image 01</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-02.jfif" alt="Oxford and Cambridge application success case 02" onerror="this.remove()"><span>Application case<br>Image 02</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-03.jfif" alt="Oxford and Cambridge application success case 03" onerror="this.remove()"><span>Application case<br>Image 03</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-04.jfif" alt="Oxford and Cambridge application success case 04" onerror="this.remove()"><span>Application case<br>Image 04</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-05.jfif" alt="Oxford and Cambridge application success case 05" onerror="this.remove()"><span>Application case<br>Image 05</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-06.jfif" alt="Oxford and Cambridge application success case 06" onerror="this.remove()"><span>Application case<br>Image 06</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-07.jfif" alt="Oxford and Cambridge application success case 07" onerror="this.remove()"><span>Application case<br>Image 07</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-08.jfif" alt="Oxford and Cambridge application success case 08" onerror="this.remove()"><span>Application case<br>Image 08</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-09.jfif" alt="Oxford and Cambridge application success case 09" onerror="this.remove()"><span>Application case<br>Image 09</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-10.jfif" alt="Oxford and Cambridge application success case 10" onerror="this.remove()"><span>Application case<br>Image 10</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-11.jfif" alt="Oxford and Cambridge application success case 11" onerror="this.remove()"><span>Application case<br>Image 11</span></div>
+              <div class="case-shot has-image"><img src="assets/case-application-12.jfif" alt="Oxford and Cambridge application success case 12" onerror="this.remove()"><span>Application case<br>Image 12</span></div>
+            </div>
+          </div>
+
+          <div class="case-row reveal">
+            <div class="case-row-head">
+              <div class="case-row-title">
+                <span class="case-label">04</span>
+                <h3>大学课程辅导</h3>
+              </div>
+              <p>预留大学课程同步辅导、GPA 提升、选课规划和家长阶段反馈截图。</p>
+            </div>
+            <div class="case-track" aria-label="大学课程辅导截图滑动展示">
+              <div class="case-shot has-image"><img src="assets/case-university-01.jpg" alt="University course tutoring case 01" onerror="this.remove()"><span>University case<br>Image 01</span></div>
+              <div class="case-shot has-image"><img src="assets/case-university-02.jpg" alt="University course tutoring case 02" onerror="this.remove()"><span>University case<br>Image 02</span></div>
+              <div class="case-shot has-image"><img src="assets/case-university-03.jpg" alt="University course tutoring case 03" onerror="this.remove()"><span>University case<br>Image 03</span></div>
+              <div class="case-shot has-image"><img src="assets/case-university-04.jpg" alt="University course tutoring case 04" onerror="this.remove()"><span>University case<br>Image 04</span></div>
+              <div class="case-shot has-image"><img src="assets/case-university-05.jpg" alt="University course tutoring case 05" onerror="this.remove()"><span>University case<br>Image 05</span></div>
+              <div class="case-shot has-image"><img src="assets/case-university-06.jpg" alt="University course tutoring case 06" onerror="this.remove()"><span>University case<br>Image 06</span></div>
+              <div class="case-shot has-image"><img src="assets/case-university-07.jpg" alt="University course tutoring case 07" onerror="this.remove()"><span>University case<br>Image 07</span></div>
+              <div class="case-shot has-image"><img src="assets/case-university-08.jpg" alt="University course tutoring case 08" onerror="this.remove()"><span>University case<br>Image 08</span></div>
+              <div class="case-shot has-image"><img src="assets/case-university-09.jpg" alt="University course tutoring case 09" onerror="this.remove()"><span>University case<br>Image 09</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1702,7 +1917,7 @@
       <div class="container cta-grid">
         <div class="reveal">
           <h2>不确定孩子现在适合哪类规划？</h2>
-          <p>扫码添加顾问微信，先做一次初步学业评估。</p>
+          <p>扫码添加顾问微信，先做一次初步学业评估。你可以在这里放正式微信二维码、企业微信二维码或表单入口。</p>
           <div class="hero-actions" style="margin-top:26px;margin-bottom:0">
             <a class="btn btn-secondary" href="#">领取新生资料</a>
             <a class="btn btn-secondary" href="#canada">查看加拿大本科辅导</a>
@@ -1799,9 +2014,9 @@
       });
     });
 
-    const mentorTracks=document.querySelectorAll('.mentor-track');
+    const scrollingTracks=document.querySelectorAll('.mentor-track, .case-track');
     const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    mentorTracks.forEach(track=>{
+    scrollingTracks.forEach(track=>{
       const originalCards=Array.from(track.children);
       originalCards.forEach(card=>{
         const clone=card.cloneNode(true);
@@ -1820,11 +2035,13 @@
       track.addEventListener('mouseleave',resume);
       track.addEventListener('focusin',pause);
       track.addEventListener('focusout',resume);
+      track.addEventListener('touchstart',pause,{passive:true});
+      track.addEventListener('touchend',resume,{passive:true});
 
       function autoScroll(){
         const resetPoint=track.scrollWidth/2;
         if(!paused && resetPoint>track.clientWidth){
-          track.scrollLeft+=0.35;
+          track.scrollLeft+=track.classList.contains('case-track') ? 0.45 : 0.35;
           if(track.scrollLeft>=resetPoint){
             track.scrollLeft=0;
           }
